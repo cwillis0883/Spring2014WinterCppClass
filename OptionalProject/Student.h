@@ -11,7 +11,9 @@ public:
 	~Student();
 	string getID();
 	string getName();
-	string getClasses();
+	void addClass(Course);
+	void printClasses();
+	bool noCourses();
 	friend ostream& operator<<(ostream&, Student& student);
 
 private:
