@@ -1,62 +1,91 @@
 #include "CppUnitLite\TestHarness.h"
 #include "Queue.h"
 
-TEST(empty_queue, Queue)
+TEST(EmptyQueueTest, Queue)
 {
-  Queue<int> queue1(10);
-  CHECK_EQUAL(true, queue1.isEmpty());
+  std::cout << "Entering EmptyQueueTest..." << std::endl;
+  Queue<int> testQueue(3);
+  CHECK_EQUAL(true, testQueue.isEmpty());
 }
 
-TEST(push_pop, Queue)
+TEST(PushAndPopTest, Queue)
 {
-  Queue<int> queue2(10);
-  queue2.push(10);
-  queue2.push(15);
-  queue2.push(20);
-  queue2.push(25);
+	std::cout << "Entering PushAndPopTest..." << std::endl;
+	Queue<int> testQueue(3);
+	testQueue.push(1);
+	testQueue.push(2);
+	testQueue.push(3);
 
-  CHECK_EQUAL(10, queue2.pop());
-  CHECK_EQUAL(15, queue2.pop());
+	CHECK_EQUAL(1, testQueue.pop());
 }
 
-TEST(size, Queue)
+TEST(GetSizeTest, Queue)
 {
-  Queue<int> queue3(10);
-  queue3.push(1);
-  queue3.push(2);
-  queue3.push(3);
+	std::cout << "Entering GetSizeTest..." << std::endl;
+	Queue<int> testQueue(3);
+	testQueue.push(1);
+	testQueue.push(2);
+	testQueue.push(3);
 
-  CHECK_EQUAL(3, queue3.size());
+	CHECK_EQUAL(3, testQueue.size());
 }
 
-TEST(assignment, Queue)
+TEST(AssignmentOperatorTest, Queue)
 {
-  Queue<int> queue4(10);
-  Queue<int> queue5(10);
-  Queue<double> queue6(10);
+	std::cout << "Entering AssignmentOperatorTest..." << std::endl;
+	Queue<int> testQueue1(10);
+	Queue<int> testQueue2(10);
 
-  queue4.push(5);
-  queue4.push(6);
-  queue4.push(7);
+	testQueue1.push(1);
+	testQueue1.push(2);
+	testQueue1.push(3);
 
-  queue5 = queue4;
+	testQueue2 = testQueue1;
 
-  CHECK_EQUAL(5, queue5.pop());
-
-  queue6 = queue4;
-  CHECK_EQUAL(5, queue6.pop());
-
+	CHECK_EQUAL(1, testQueue2.pop());
 }
 
-TEST(exception, Queue)
+TEST(EmptyExceptionTest, Queue)
 {
-  Queue<int> queue5(10);
-  try
-  {
-    queue5.pop();
-  }
-  catch(QueueEmpty* e)
-  {
-    std::cerr << e->GetDescription(); 
-  }
+	std::cout << "Entering EmptyExceptionTest..." << std::endl;
+	Queue<int> testQueue(10);
+	try
+	{
+		testQueue.pop();
+	}
+	catch (QueueEmpty* ex)
+	{
+		std::cerr << ex->what();
+	}
+}
+
+TEST(FullQueueExceptionTest, Queue)
+{
+	std::cout << "Entering FullQueueExceptionTest..." << std::endl;
+	Queue<int> testQueue(1);
+	try
+	{
+		testQueue.push(1);
+		testQueue.push(2);
+	}
+	catch (QueueFull* ex)
+	{
+		std::cerr << ex->what();
+	}
+}
+
+TEST(MissingElementExceptionTest, Queue)
+{
+	std::cout << "Entering MissingElementException..." << std::endl;
+	Queue<int> testQueue(2);
+	try
+	{
+		testQueue.push(1);
+		testQueue.push(2);
+		testQueue.at(3);
+	}
+	catch (MissingElement* ex)
+	{
+		std::cerr << ex->what();
+	}
 }

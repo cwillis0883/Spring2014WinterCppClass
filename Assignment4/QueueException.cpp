@@ -1,20 +1,21 @@
 #include "QueueException.h"
 
-inline const char* QueueException::GetDescription() const throw()
+const char* QueueException::what() const throw()
 {
-  return "an exception was raised!";
-}
-inline const char* QueueEmpty::GetDescription() const throw()
-{
-  return "Queue is empty";
+  return "Operation failed. An exception has been caught.\n";
 }
 
-inline const char* QueueFull::GetDescription() const throw()
+const char* QueueEmpty::what() const throw()
 {
-  return "Queue is full";
+  return "Operation failed. The queue is empty.\n";
 }
 
-inline const char* MissingElement::GetDescription() const throw()
+const char* QueueFull::what() const throw()
 {
-  return "Could not find element";
+  return "Operation failed. The queue is full.\n";
+}
+
+const char* MissingElement::what() const throw()
+{
+  return "Operation failed. Could not find element in the queue.\n";
 }

@@ -14,7 +14,6 @@ public:
 
   ~Queue()
   {
-    delete[] myQueue;
   }
 
   void push(T input)
@@ -69,18 +68,17 @@ public:
     return currentSize;
   }
 
- template <typename T2>
- void operator =(Queue<T2>& inQueue)
-  // Queue<T>& operator=(Queue<T2>& inQueue)
+template <typename T2>
+void operator =(Queue<T2>& inQueue)
+{
+  if(inQueue.size() <= maxSize)
   {
-    if(inQueue.size() <= maxSize)
+     for(int i = 0; i < inQueue.size(); i++)
     {
-      for(int i = 0; i < inQueue.size(); i++)
-      {
-        myQueue[i] = inQueue.at(i);
-      }
+       myQueue[i] = inQueue.at(i);
     }
   }
+}
 
 private:
   int currentSize;
